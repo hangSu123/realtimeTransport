@@ -1,0 +1,7 @@
+.citySelection{
+  margin: 10rem auto;
+  text-align: center;
+}
+.card-body button{
+  display: inline-block;
+}

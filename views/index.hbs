@@ -1,0 +1,60 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">实时公交</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">首页 <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">我的</a>
+    </div>
+  </div>
+</nav>
+
+
+
+		<div class="card citySelection" style="width: 15rem; ">
+			<div class="card-body">
+				<h5 class="card-title"><image id ="getLocation" src='/images/ditu.png'></image>
+          <span id = "GPS">城市名</span>
+        </h5>
+				<h6 class="card-subtitle mb-2 text-muted" id="picker">点击手动选择城市</h6>
+				<button type="submit" class="btn btn-primary">公交查询</button>
+				<button type="submit" class="btn btn-success">站点查询</button>
+			</div>
+		</div>
+
+
+<script type="text/javascript" src="/javascripts/cityScripts/picker.min.js"></script>
+<script type="text/javascript" src="/javascripts/cityScripts/city.js"></script>
+<script type="text/javascript" src="/javascripts/cityScripts//index.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+
+function showLocation(data) {
+    console.log(data.content);
+    hs.text(hs.getId('GPS'),data.content.address_detail.city)
+    localStorage.setItem('location', data.content.address_detail.city)
+    localStorage.setItem('fullLocation', data.content.address_detail.province+' '+data.content.address_detail.city)
+
+
+}
+
+
+if (hs.isEmpty(localStorage.getItem('location') == false)){
+  hs.text(hs.getId('GPS'),localStorage.getItem('location'))
+  
+}else{
+  $.getScript("https://api.map.baidu.com/location/ip?ak=WludGCMIcDVMMvCBeOLElA9Uw1Dp81X5&callback=showLocation");
+}
+
+hs.click(hs.getId('getLocation'),function(){
+  $.getScript("https://api.map.baidu.com/location/ip?ak=WludGCMIcDVMMvCBeOLElA9Uw1Dp81X5&callback=showLocation");
+})
+
+
+
+</script>
